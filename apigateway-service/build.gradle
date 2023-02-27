@@ -23,24 +23,22 @@ ext {
 }
 
 dependencies {
+	/** msa - configuration */
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+	/** msa - eureka server */
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
-	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-
-	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
-	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.7'
-
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
-	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.5'
-
-	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bootstrap
-	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.5'
-
+	/** jwt */
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	/** tools */
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 dependencyManagement {
