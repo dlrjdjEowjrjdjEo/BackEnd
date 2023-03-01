@@ -5,6 +5,6 @@ spring:
   cloud:
     config:
       uri: http://127.0.0.1:8888 # 깃 저장소 uri가 아니라 config server uri를 지정해야함
-      name: config
+      name: discovery
   profiles:
     active: dev
