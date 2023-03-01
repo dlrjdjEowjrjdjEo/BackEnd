@@ -1,10 +1,22 @@
+server:
+  port: 8888
+
 spring:
-#  config:
-#    activate:
-#      on-profile: dev
+  main:
+    web-application-type: reactive
+  application:
+    name: config-service
   cloud:
     config:
-      uri: http://127.0.0.1:8888 # 깃 저장소 uri가 아니라 config server uri를 지정해야함
-      name: config
-  profiles:
-    active: dev
+      server:
+        git:
+          uri: git@github.com:medicMSA/Configuration.git
+          default-label: main #브랜치명
+#          ignore-local-ssh-settings: true
+          strictHostKeyChecking: false
+#          private-key: |
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
