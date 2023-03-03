@@ -1,7 +1,7 @@
 plugins {
+    id 'java'
     id 'org.springframework.boot' version '2.7.6'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    id 'java'
 }
 
 group = 'com.medic'
@@ -22,16 +22,14 @@ ext {
     set('springCloudVersion', "2021.0.5")
 }
 
-
 dependencies {
-
+    /** msa - eureka server */
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    /** tools */
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 }
 
 dependencyManagement {
@@ -40,6 +38,6 @@ dependencyManagement {
     }
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }

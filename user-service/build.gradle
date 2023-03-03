@@ -19,39 +19,35 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2021.0.4")
+	set('springCloudVersion', "2021.0.5")
 }
 
 dependencies {
-	/** db */
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'mysql:mysql-connector-java'
-	implementation 'org.modelmapper:modelmapper:3.1.0'
-
 	/** msa - configuration */
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
 	/** msa - eureka server */
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
 	/** msa - feign client */
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	/** tools */
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
+	/** db */
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+	runtimeOnly 'mysql:mysql-connector-java'
 	/** jwt */
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-
 	/** kakao login */
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-
-	/** tools */
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 dependencyManagement {
