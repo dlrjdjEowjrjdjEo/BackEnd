@@ -48,6 +48,8 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	/** kakao login */
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	/** codef */
+	implementation 'io.codef.api:easycodef-java:1.0.5'
 }
 
 dependencyManagement {

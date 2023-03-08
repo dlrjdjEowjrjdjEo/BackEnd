@@ -1,4 +1,4 @@
-package com.medic.userservice.dto;
+package com.medic.userservice.entity;
 
 import lombok.*;
 import javax.persistence.*;
@@ -6,11 +6,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
