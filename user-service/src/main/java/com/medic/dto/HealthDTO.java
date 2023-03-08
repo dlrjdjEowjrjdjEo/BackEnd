@@ -1,4 +1,4 @@
-package com.medic.userservice.dto;
+package com.medic.dto;
 
 import lombok.*;
 

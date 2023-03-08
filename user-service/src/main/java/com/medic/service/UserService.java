@@ -1,12 +1,10 @@
-package com.medic.userservice.service;
-
-import com.medic.userservice.entity.UserEntity;
+package com.medic.service;
 
 import java.util.List;
 
 public interface UserService  {
     Boolean signup(String email, String name, int age, String gender);
-    UserEntity findOneByUserId(int userId);
+    /*UserEntity findOneByUserId(int userId);
     void updateRecommend(String email, String recoOne, String recoTwo, String recoThr);
     Like insertLike(int userId, int supplementId);
     void deleteLike(int userId, int supplementId);
@@ -18,5 +16,5 @@ public interface UserService  {
     String[] userFirstSurvey(UserFirstSurveyReq userFirstSurveyReq);
     void insertDetail(DetailHealthReq detailHealthReq);
     void patchGender(String email, String gender);
-    List<CompareUser> calcSimilarity(CommonQuestion cq, int age, String gender, int uuId);
+    List<CompareUser> calcSimilarity(CommonQuestion cq, int age, String gender, int uuId);*/
 }

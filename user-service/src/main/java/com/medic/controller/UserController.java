@@ -1,9 +1,7 @@
-package com.medic.userservice.controller;
+package com.medic.controller;
 
-import com.medic.userservice.codef.Codef;
-import com.medic.userservice.dto.HealthDTO;
-import com.medic.userservice.entity.UserEntity;
-import com.medic.userservice.service.UserService;
+import com.medic.codef.Codef;
+import com.medic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,7 +80,7 @@ public class UserController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @PostMapping("/healthcheckdata")
+    /*@PostMapping("/healthcheckdata")
     public ResponseEntity<?> getHealthCheckData(@RequestBody HealthDTO.ReqGet getHealthReq) throws Exception {
         HashMap<String, Object> map = codef.getHealthCheckData(getHealthReq.getUserName(), getHealthReq.getPhoneNumber(), getHealthReq.getBirthday());
         List<String> list = (List<String>) map.get("list");
@@ -296,5 +294,5 @@ public class UserController {
                 data.getPhysicalActivity(),
                 data.getUserId());
         return new ResponseEntity<CommonQuestionRes>(cm, HttpStatus.OK);
-    }
+    }*/
 }

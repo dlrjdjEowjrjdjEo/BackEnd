@@ -1,4 +1,4 @@
-package com.medic.userservice.jpa;
+package com.medic.jpa;
 
 import lombok.Data;
 

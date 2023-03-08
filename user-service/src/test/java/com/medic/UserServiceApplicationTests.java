@@ -1,4 +1,4 @@
-package com.medic.userservice;
+package com.medic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

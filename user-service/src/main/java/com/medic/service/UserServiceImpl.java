@@ -1,8 +1,7 @@
-package com.medic.userservice.service;
+package com.medic.service;
 
-import com.medic.userservice.dto.HealthDTO;
-import com.medic.userservice.entity.UserEntity;
-import com.medic.userservice.jpa.UserRepository;
+import com.medic.entity.UserEntity;
+import com.medic.jpa.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class UserServiceImpl {
         return false;
     }
 
-    @Transactional
+    /*@Transactional
     public UserEntity findOneByUserId(int userId) throws Exception {
         return userRepository.findOneByUserId(userId);
     }
@@ -615,5 +614,5 @@ public class UserServiceImpl {
         Collections.sort(comparedUser);
 
         return comparedUser;
-    }
+    }*/
 }

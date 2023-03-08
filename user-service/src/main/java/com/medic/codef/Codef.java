@@ -1,4 +1,4 @@
-package com.medic.userservice.codef;
+package com.medic.codef;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.codef.api.EasyCodef;

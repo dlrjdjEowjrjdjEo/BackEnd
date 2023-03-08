@@ -1,4 +1,4 @@
-package com.medic.userservice.entity;
+package com.medic.entity;
 
 import lombok.*;
 import javax.persistence.*;
