@@ -4,10 +4,7 @@ import com.medic.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -24,6 +21,11 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @GetMapping("/check")
+    public String check() {
+        return "Hello User Controller";
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody String code) throws Exception {

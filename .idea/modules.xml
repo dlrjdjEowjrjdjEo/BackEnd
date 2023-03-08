@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BackEnd.iml" filepath="$PROJECT_DIR$/.idea/BackEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/apigateway-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/apigateway-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/config-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/config-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discovery-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/discovery-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.main.iml" />
     </modules>
   </component>
 </project>
