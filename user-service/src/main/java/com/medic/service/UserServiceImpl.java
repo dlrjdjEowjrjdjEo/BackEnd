@@ -1,17 +1,15 @@
 package com.medic.service;
 
-import com.medic.entity.UserEntity;
+import com.medic.jpa.UserEntity;
 import com.medic.jpa.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-
 @Slf4j
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
 

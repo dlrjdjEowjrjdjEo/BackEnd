@@ -1,3 +1,4 @@
+/*
 package com.medic.dto;
 
 import lombok.*;
@@ -35,3 +36,4 @@ public class HealthDTO {
         private Integer userId;
     }
 }
+*/
