@@ -1,5 +1,6 @@
 package com.medic.service;
 
+import com.medic.dto.CompareUser;
 import com.medic.dto.HealthDTO;
 import com.medic.dto.UpdateNameReq;
 import com.medic.dto.UserFirstSurveyReq;

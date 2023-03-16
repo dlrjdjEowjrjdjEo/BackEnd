@@ -5,7 +5,7 @@ import com.medic.dto.*;
 import com.medic.jpa.CommonQuestion;
 import com.medic.jpa.Like;
 import com.medic.jpa.UserEntity;
-import com.medic.service.CommonQuestionService;
+import com.medic.service.CommonQuestionServiceImpl;
 import com.medic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,13 +29,13 @@ public class UserController {
 
     private final Codef codef;
     private final UserService userService;
-    private final CommonQuestionService commonQuestionService;
+    private final CommonQuestionServiceImpl commonQuestionServiceImpl;
 
     @Autowired
-    public UserController(Codef codef, UserService userService, CommonQuestionService commonQuestionService) {
+    public UserController(Codef codef, UserService userService, CommonQuestionServiceImpl commonQuestionServiceImpl) {
         this.codef = codef;
         this.userService = userService;
-        this.commonQuestionService = commonQuestionService;
+        this.commonQuestionServiceImpl = commonQuestionServiceImpl;
     }
 
     @GetMapping("/check")
@@ -93,18 +93,18 @@ public class UserController {
         List<String> list = (List<String>) map.get("list");
         boolean check = (boolean) map.get("check");
         UserEntity user = userService.findOneByEmail(getHealthReq.getEmail());
-        commonQuestionService.createCq(user.getUserId());
+        commonQuestionServiceImpl.createCq(user.getUserId());
         int userId = user.getUserId();
         for (String str : list) {
 //			System.out.println("리스트에 담긴 영양소 값=>"+str);
-            if (str.equals("철분")) commonQuestionService.updateFe(userId);
-            if (str.equals("비타민 D")) commonQuestionService.updateVitaminD(userId);
-            if (str.equals("종합비타민")) commonQuestionService.updateMultivitamin(userId);
-            if (str.equals("비타민 C")) commonQuestionService.updateVitaminC(userId);
-            if (str.equals("오메가 3")) commonQuestionService.updateOmega3(userId);
-            if (str.equals("마그네슘")) commonQuestionService.updateMagnesium(userId);
-            if (str.equals("비타민 B")) commonQuestionService.updateVitaminB(userId);
-            if (str.equals("콜라겐")) commonQuestionService.updateCollagen(userId);
+            if (str.equals("철분")) commonQuestionServiceImpl.updateFe(userId);
+            if (str.equals("비타민 D")) commonQuestionServiceImpl.updateVitaminD(userId);
+            if (str.equals("종합비타민")) commonQuestionServiceImpl.updateMultivitamin(userId);
+            if (str.equals("비타민 C")) commonQuestionServiceImpl.updateVitaminC(userId);
+            if (str.equals("오메가 3")) commonQuestionServiceImpl.updateOmega3(userId);
+            if (str.equals("마그네슘")) commonQuestionServiceImpl.updateMagnesium(userId);
+            if (str.equals("비타민 B")) commonQuestionServiceImpl.updateVitaminB(userId);
+            if (str.equals("콜라겐")) commonQuestionServiceImpl.updateCollagen(userId);
             Thread.sleep(100);
         }
         userService.updateRecommend(getHealthReq.getEmail(), list.get(0), list.get(1), list.get(2));
@@ -202,7 +202,7 @@ public class UserController {
 
     @GetMapping("/findCommonQuestion/{userId}")
     public ResponseEntity<?> findCommonQuestion(@PathVariable Integer userId) {
-        CommonQuestion data = commonQuestionService.findOneByUserId(userId);
+        CommonQuestion data = commonQuestionServiceImpl.findOneByUserId(userId);
 
         String disease = "";
         if (data.getAnemia()) disease += "빈혈, ";

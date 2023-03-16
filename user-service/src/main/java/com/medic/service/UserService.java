@@ -4,7 +4,7 @@ import com.medic.dto.HealthDTO;
 import com.medic.dto.UpdateNameReq;
 import com.medic.dto.UserFirstSurveyReq;
 import com.medic.jpa.CommonQuestion;
-import com.medic.jpa.CompareUser;
+import com.medic.dto.CompareUser;
 import com.medic.jpa.Like;
 import com.medic.jpa.UserEntity;
 

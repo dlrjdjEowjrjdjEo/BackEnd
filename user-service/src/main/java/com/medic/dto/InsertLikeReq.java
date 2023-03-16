@@ -13,6 +13,4 @@ public class InsertLikeReq {
 
 	@NotNull(message = "supplement id를 입력하세요.")
 	private int supplementId;
-
-
 }

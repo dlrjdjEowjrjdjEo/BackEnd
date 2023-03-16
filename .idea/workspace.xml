@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80020ab6-b797-40a3-8e35-e18206577361" name="Changes" comment="Feat: Modify Mypage-service &amp; Dto, Service, jpa">
-      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/CalendarController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/dto/CalendarReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/dto/CalendarRes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/Calendar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/CalendarRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/InsertLikeReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/Like.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/LikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="80020ab6-b797-40a3-8e35-e18206577361" name="Changes" comment="Refactor: Remove calendar controller dead code">
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/service/MypageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/service/MypageService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/InsertLikeReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/InsertLikeReq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CompareUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/CompareUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserServiceImpl.java" afterDir="false" />
     </list>
@@ -272,7 +266,7 @@
       <workItem from="1678839759168" duration="1252000" />
       <workItem from="1678924711763" duration="1865000" />
       <workItem from="1678927512773" duration="1796000" />
-      <workItem from="1678929316521" duration="3427000" />
+      <workItem from="1678929316521" duration="6521000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: Add mypage controller check template">
       <created>1678681632380</created>
@@ -309,7 +303,28 @@
       <option name="project" value="LOCAL" />
       <updated>1678930393283</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Feat: Modify User-service &amp; Like, Mypage-service &amp; Calendar">
+      <created>1678933168454</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678933168454</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Refactor: Remove controller &amp; service dead code">
+      <created>1678933741403</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1678933741403</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Refactor: Remove calendar controller dead code">
+      <created>1678933808123</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1678933808123</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,7 +338,10 @@
     <MESSAGE value="Feat: Add mypage template" />
     <MESSAGE value="Feat: Modify User-service &amp; Dto, Service, jpa" />
     <MESSAGE value="Feat: Modify Mypage-service &amp; Dto, Service, jpa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: Modify Mypage-service &amp; Dto, Service, jpa" />
+    <MESSAGE value="Feat: Modify User-service &amp; Like, Mypage-service &amp; Calendar" />
+    <MESSAGE value="Refactor: Remove controller &amp; service dead code" />
+    <MESSAGE value="Refactor: Remove calendar controller dead code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor: Remove calendar controller dead code" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -41,6 +41,4 @@ public interface CommonQuestionRepository extends JpaRepository<CommonQuestion, 
     @Modifying
     @Query(value = "update commonquestion set backache = true, problem = '관절' where user_id = ?1", nativeQuery = true)
     void updateCollagen(Integer userId);
-    
-    
 }

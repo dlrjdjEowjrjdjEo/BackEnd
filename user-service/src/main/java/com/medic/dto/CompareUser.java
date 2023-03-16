@@ -1,4 +1,4 @@
-package com.medic.jpa;
+package com.medic.dto;
 
 import lombok.Data;
 
@@ -8,14 +8,12 @@ public class CompareUser implements Comparable<CompareUser> {
 	private Integer cnt;
 
 	public CompareUser(Integer userId, Integer cnt) {
-		super();
 		this.userId = userId;
 		this.cnt = cnt;
 	}
 
 	@Override
 	public int compareTo(CompareUser cu) {
-		CompareUser u2 = cu;
-		return u2.cnt - this.cnt;
+		return cu.cnt - this.cnt;
 	}
 }
