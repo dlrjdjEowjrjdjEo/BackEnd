@@ -40,7 +40,7 @@ public class CalendarController {
 
 	@GetMapping("/{userId}/{date}/{day}")
 	public ResponseEntity<?> myDate(@PathVariable int userId, @PathVariable String date, @PathVariable String day) {
-		List<CalendarRes> resultList = new ArrayList<CalendarRes>();
+		List<CalendarRes> resultList = new ArrayList<>();
 		List<Routine> routineList = mypageService.getRoutineListByDay(userId, day, date);
 		List<Calendar> calendarList = mypageService.getCalendarDayList(userId, date);
 		for (Routine r : routineList) {
@@ -56,7 +56,7 @@ public class CalendarController {
 			res.setPushAlarm(r.getPushAlarm());
 			
 			int routineId = r.getRoutineId();
-			Boolean taken = false;
+			boolean taken = false;
 			for (Calendar c : calendarList) {
 				if (c.getRoutineId() == routineId)
 					taken = true;
