@@ -1,47 +1,32 @@
 package com.medic.service;
 
-import com.todaypill.db.entity.Calendar;
-import com.todaypill.db.entity.Like;
-import com.todaypill.db.entity.Routine;
-import com.todaypill.db.entity.User;
-import com.todaypill.repository.CalendarRepository;
-import com.todaypill.repository.LikeRepository;
-import com.todaypill.repository.RoutineRepository;
-import com.todaypill.repository.UserRepository;
+import com.medic.jpa.Routine;
+import com.medic.jpa.RoutineRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class MypageService {
 
-	/*@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private LikeRepository likeRepository;
-
-	@Autowired
 	private RoutineRepository routineRepository;
-	
-	@Autowired
-	private CalendarRepository calendarRepository;*/
 
-	/*public MyPageService(UserRepository userRepository, LikeRepository likeRepository,
-                         RoutineRepository routineRepository, CalendarRepository calendarRepository) {
-		super();
-		this.userRepository = userRepository;
-		this.likeRepository = likeRepository;
-		this.routineRepository = routineRepository;
-	}
+    @Autowired
+    public MypageService(RoutineRepository routineRepository) {
+        this.routineRepository = routineRepository;
+    }
 
-	@Transactional
-	public List<Like> getLikeList(int userId) {
-		return likeRepository.findAllByUserId(userId);
-	}
+//    @Transactional
+//	public List<Like> getLikeList(int userId) {
+//		return likeRepository.findAllByUserId(userId);
+//	}
 
-	@Transactional
-	public User getUser(int userId) {
-		return userRepository.findOneByUserId(userId);
-	}
+//	@Transactional
+//	public User getUser(int userId) {
+//		return userRepository.findOneByUserId(userId);
+//	}
 
 	@Transactional
 	public List<Routine> getRoutineList(int userId) {
@@ -53,7 +38,7 @@ public class MypageService {
 		return routineRepository.findAllByUserIdAndDay(userId, day, date);
 	}
 
-	@Transactional
+	/*@Transactional
 	public List<Calendar> getCalendarMonthList(int userId, int month) {
 		return calendarRepository.findAllByMonth(userId, month);
 	}
@@ -76,7 +61,7 @@ public class MypageService {
 	@Transactional
 	public void deleteCalendar(int calendarId) {
 		calendarRepository.deleteCalendar(calendarId);
-	}
+	}*/
 
 	@Transactional
 	public Routine insertRoutine(Routine routine) {
@@ -100,5 +85,5 @@ public class MypageService {
 //		originalRoutine.setPushAlarm(routine.getPushAlarm());
 		routineRepository.save(originalRoutine);
 		routineRepository.save(routine);
-	}*/
+	}
 }

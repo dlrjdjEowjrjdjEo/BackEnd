@@ -1,10 +1,15 @@
 package com.medic.controller;
 
+import com.medic.dto.DeleteRoutineReq;
+import com.medic.dto.RoutineReq;
+import com.medic.jpa.Routine;
 import com.medic.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -15,7 +20,7 @@ public class MypageController {
         return "Hello MyPage Controller";
     }
 
-    private MypageService mypageService;
+    private final MypageService mypageService;
 
     @Autowired
     public MypageController(MypageService mypageService) {
@@ -30,11 +35,11 @@ public class MypageController {
         map.put("user", user);
         map.put("likeList", list);
         return new ResponseEntity<>(map, HttpStatus.OK);
-    }
+    }*/
 
     @GetMapping("/{userId}/mysupplement")
     public ResponseEntity<?> mySupplement(@PathVariable int userId) {
-        List<Routine> list = myPageService.getRoutineList(userId);
+        List<Routine> list = mypageService.getRoutineList(userId);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -43,14 +48,14 @@ public class MypageController {
         Routine routine = Routine.builder().userId(userId).supplementId(routineReq.getSupplementId())
                 .time(routineReq.getTime()).day(routineReq.getDay()).tablets(routineReq.getTablets())
                 .pushAlarm(routineReq.getPushAlarm()).addedSince(routineReq.getAddedSince()).build();
-        myPageService.insertRoutine(routine);
+        mypageService.insertRoutine(routine);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/{userId}/mysupplement/{routineId}")
     public ResponseEntity<?> updateRoutineVisibility(@PathVariable int routineId, @RequestBody DeleteRoutineReq deleteRoutineReq) {
         String deletedSince = deleteRoutineReq.getDeletedSince();
-        myPageService.updateRoutineVisibility(routineId, deletedSince);
+        mypageService.updateRoutineVisibility(routineId, deletedSince);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -61,7 +66,7 @@ public class MypageController {
         Routine routine = Routine.builder().userId(userId).supplementId(routineReq.getSupplementId())
                 .time(routineReq.getTime()).day(routineReq.getDay()).tablets(routineReq.getTablets())
                 .pushAlarm(routineReq.getPushAlarm()).addedSince(routineReq.getAddedSince()).build();
-        myPageService.updateRoutine(routineId, routine, deletedSince);
+        mypageService.updateRoutine(routineId, routine, deletedSince);
         return new ResponseEntity<>(HttpStatus.OK);
-    }*/
+    }
 }

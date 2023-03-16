@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80020ab6-b797-40a3-8e35-e18206577361" name="Changes" comment="Feat: Add mypage template">
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/CommonQuestionRes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/UpdateNameReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/UserFirstSurveyReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CompareUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionService.java" afterDir="false" />
+    <list default="true" id="80020ab6-b797-40a3-8e35-e18206577361" name="Changes" comment="Feat: Modify Mypage-service &amp; Dto, Service, jpa">
+      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/dto/DeleteRoutineReq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/dto/RoutineReq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/Routine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/RoutineRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/MypageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/service/MypageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/service/MypageService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/HealthDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/HealthDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/entity/UserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,33 +67,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Osstem/Desktop/BackEnd&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;13c0e64f0b726b852d407cfbeb7c242b&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "C:/Users/Osstem/Desktop/BackEnd/mypage-service/src/main/java/com/medic/dto",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "13c0e64f0b726b852d407cfbeb7c242b",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Osstem\Desktop\BackEnd\mypage-service\src\main\java\com\medic\dto" />
       <recent name="C:\Users\Osstem\Desktop\BackEnd\mypage-service\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -246,7 +242,7 @@
       <workItem from="1678839759168" duration="1252000" />
       <workItem from="1678924711763" duration="1865000" />
       <workItem from="1678927512773" duration="1796000" />
-      <workItem from="1678929316521" duration="171000" />
+      <workItem from="1678929316521" duration="1060000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: Add mypage controller check template">
       <created>1678681632380</created>
@@ -269,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678706939103</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Feat: Modify User-service &amp; Dto, Service, jpa">
+      <created>1678929590956</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678929590956</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +284,9 @@
     </ignored-roots>
     <MESSAGE value="Feat: Add mypage controller check template" />
     <MESSAGE value="Feat: Add mypage template" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: Add mypage template" />
+    <MESSAGE value="Feat: Modify User-service &amp; Dto, Service, jpa" />
+    <MESSAGE value="Feat: Modify Mypage-service &amp; Dto, Service, jpa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: Modify Mypage-service &amp; Dto, Service, jpa" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

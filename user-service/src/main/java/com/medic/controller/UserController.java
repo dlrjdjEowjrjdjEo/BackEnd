@@ -28,9 +28,9 @@ import org.json.simple.parser.JSONParser;
 @RequestMapping("/")
 public class UserController {
 
-    Codef codef;
-    UserService userService;
-    CommonQuestionService commonQuestionService;
+    private final Codef codef;
+    private final UserService userService;
+    private final CommonQuestionService commonQuestionService;
 
     @Autowired
     public UserController(Codef codef, UserService userService, CommonQuestionService commonQuestionService) {
