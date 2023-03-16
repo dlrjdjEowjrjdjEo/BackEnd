@@ -1,21 +1,26 @@
 package com.medic.service;
 
+import com.medic.jpa.Calendar;
 import com.medic.jpa.Routine;
 import com.medic.jpa.RoutineRepository;
+import com.medic.jpa.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MypageService {
 
-	private RoutineRepository routineRepository;
+	private final RoutineRepository routineRepository;
+	private final CalendarRepository calendarRepository;
 
     @Autowired
-    public MypageService(RoutineRepository routineRepository) {
-        this.routineRepository = routineRepository;
+    public MypageService(RoutineRepository routineRepository, CalendarRepository calendarRepository) {
+		this.routineRepository = routineRepository;
+		this.calendarRepository = calendarRepository;
     }
 
 //    @Transactional
@@ -38,7 +43,7 @@ public class MypageService {
 		return routineRepository.findAllByUserIdAndDay(userId, day, date);
 	}
 
-	/*@Transactional
+	@Transactional
 	public List<Calendar> getCalendarMonthList(int userId, int month) {
 		return calendarRepository.findAllByMonth(userId, month);
 	}
@@ -61,7 +66,7 @@ public class MypageService {
 	@Transactional
 	public void deleteCalendar(int calendarId) {
 		calendarRepository.deleteCalendar(calendarId);
-	}*/
+	}
 
 	@Transactional
 	public Routine insertRoutine(Routine routine) {

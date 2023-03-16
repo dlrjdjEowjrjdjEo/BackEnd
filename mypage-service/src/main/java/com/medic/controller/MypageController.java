@@ -15,16 +15,16 @@ import java.util.List;
 @RequestMapping("/")
 public class MypageController {
 
-    @GetMapping("/check")
-    public String check() {
-        return "Hello MyPage Controller";
-    }
-
     private final MypageService mypageService;
 
     @Autowired
     public MypageController(MypageService mypageService) {
         this.mypageService = mypageService;
+    }
+
+    @GetMapping("/check")
+    public String check() {
+        return "Hello MyPage Controller";
     }
 
     /*@GetMapping("/{userId}")

@@ -1,11 +1,9 @@
 package com.medic.controller;
 
 import com.medic.codef.Codef;
-import com.medic.dto.CommonQuestionRes;
-import com.medic.dto.HealthDTO;
-import com.medic.dto.UpdateNameReq;
-import com.medic.dto.UserFirstSurveyReq;
+import com.medic.dto.*;
 import com.medic.jpa.CommonQuestion;
+import com.medic.jpa.Like;
 import com.medic.jpa.UserEntity;
 import com.medic.service.CommonQuestionService;
 import com.medic.service.UserService;
@@ -18,6 +16,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -115,7 +114,7 @@ public class UserController {
 
     //큰 약 잘 먹는지, 선호하는 브랜드명,
     @PostMapping("/healthcheckdata/detailcheck")
-    public ResponseEntity<?> setCommonQuestionForHealthCheck(@RequestBody HealthDTO.ReqDetail detailHealthReq) throws Exception {
+    public ResponseEntity<?> setCommonQuestionForHealthCheck(@RequestBody HealthDTO.ReqDetail detailHealthReq) {
         userService.insertDetail(detailHealthReq);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -127,46 +126,46 @@ public class UserController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
-    //5. 좋아요 누르면 insert
-//    @PostMapping("/insertlike")
-//    public ResponseEntity<?> insertLike(@RequestBody InsertLikeReq insertLikeReq) throws Exception {
-//        userService.insertLike(insertLikeReq.getUserId(), insertLikeReq.getSupplementId());
-//        return new ResponseEntity<String>(HttpStatus.OK);
-//    }
+    /*//5. 좋아요 누르면 insert
+    @PostMapping("/insertlike")
+    public ResponseEntity<?> insertLike(@RequestBody InsertLikeReq insertLikeReq) throws Exception {
+        userService.insertLike(insertLikeReq.getUserId(), insertLikeReq.getSupplementId());
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
 
     //6. 좋아요 눌러진거 삭제하기
-//    @DeleteMapping("/deletelike/{userId}/{supplementId}")
-//    public ResponseEntity<?> deleteLike(@PathVariable int userId, @PathVariable int supplementId) throws Exception {
-//        userService.deleteLike(userId, supplementId);
-//        return new ResponseEntity<String>(HttpStatus.OK);
-//    }
+    @DeleteMapping("/deletelike/{userId}/{supplementId}")
+    public ResponseEntity<?> deleteLike(@PathVariable int userId, @PathVariable int supplementId) throws Exception {
+        userService.deleteLike(userId, supplementId);
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }*/
 
     //7. 영양제별 좋아요 개수 배열 리턴
-//    @GetMapping("/supplementlike/{supplementId}")
-//    public ResponseEntity<?> deleteLike(@PathVariable int supplementId) throws Exception {
-//        List<Integer> list = userService.likeListOfSupplement(supplementId);
-//        return new ResponseEntity<List<Integer>>(list, HttpStatus.OK);
-//    }
+    @GetMapping("/supplementlike/{supplementId}")
+    public ResponseEntity<?> deleteLike(@PathVariable int supplementId) {
+        List<Integer> list = userService.likeListOfSupplement(supplementId);
+        return new ResponseEntity<List<Integer>>(list, HttpStatus.OK);
+    }
 
     //유저가 누른 좋아요 개수를 통해서 프론트가 필요한 데이터 전달
-//    @GetMapping("/userLike/{userId}")
-//    public ResponseEntity<?> getUserLike(@PathVariable int userId) throws Exception {
-//        List<Like> list = userService.getUserLike(userId);
-//        List<HashMap<String, Object>> supList = new ArrayList<>();
-//        HashMap<String, Object> map = new HashMap<>();
-//        for (int i = 0; i < list.size(); i++) {
-//            Supplement supplement = supplementService.getSupplement(list.get(i).getSupplementId());
-//            HashMap<String, Object> babyMap = new HashMap<>();
-//            babyMap.put("image", supplement.getImage());
-//            babyMap.put("name", supplement.getSupplementName());
-//            babyMap.put("brand", supplement.getBrand());
-//            babyMap.put("supplementId", supplement.getSupplementId());
-//            babyMap.put("like", supplement.getLike());
-//            supList.add(babyMap);
-//        }
-//
-//        return new ResponseEntity<List<HashMap<String, Object>>>(supList, HttpStatus.OK);
-//    }
+    @GetMapping("/userLike/{userId}")
+    public ResponseEntity<?> getUserLike(@PathVariable int userId) {
+        List<Like> list = userService.getUserLike(userId);
+        List<HashMap<String, Object>> supList = new ArrayList<>();
+        HashMap<String, Object> map = new HashMap<>();
+        /*for (int i = 0; i < list.size(); i++) {
+            Supplement supplement = supplementService.getSupplement(list.get(i).getSupplementId());
+            HashMap<String, Object> babyMap = new HashMap<>();
+            babyMap.put("image", supplement.getImage());
+            babyMap.put("name", supplement.getSupplementName());
+            babyMap.put("brand", supplement.getBrand());
+            babyMap.put("supplementId", supplement.getSupplementId());
+            babyMap.put("like", supplement.getLike());
+            supList.add(babyMap);
+        }*/
+
+        return new ResponseEntity<List<HashMap<String, Object>>>(supList, HttpStatus.OK);
+    }
 
     @GetMapping("/user/{email}")
     public ResponseEntity<?> deleteLike(@PathVariable String email) {
@@ -197,7 +196,7 @@ public class UserController {
 
     //성별 바꿔주자
     @PatchMapping("/user/patchgender/{email}/{gender}")
-    public ResponseEntity<?> patchGender(@PathVariable String email, @PathVariable String gender) throws Exception {
+    public ResponseEntity<?> patchGender(@PathVariable String email, @PathVariable String gender) {
 //		System.out.println(email);
 //		System.out.println(gender);
         userService.patchGender(email, gender);
@@ -205,7 +204,7 @@ public class UserController {
     }
 
     @GetMapping("/findCommonQuestion/{userId}")
-    public ResponseEntity<?> findCommonQuestion(@PathVariable Integer userId) throws Exception {
+    public ResponseEntity<?> findCommonQuestion(@PathVariable Integer userId) {
         CommonQuestion data = commonQuestionService.findOneByUserId(userId);
 
         String disease = "";

@@ -15,13 +15,15 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    UserRepository userRepository;
-    CommonQuestionRepository commonQuestionRepository;
+    private final UserRepository userRepository;
+    private final CommonQuestionRepository commonQuestionRepository;
+    private final LikeRepository likeRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, CommonQuestionRepository commonQuestionRepository) {
+    public UserServiceImpl(UserRepository userRepository, CommonQuestionRepository commonQuestionRepository, LikeRepository likeRepository) {
         this.userRepository = userRepository;
         this.commonQuestionRepository = commonQuestionRepository;
+        this.likeRepository = likeRepository;
     }
 
     // 회원 등록
@@ -51,44 +53,44 @@ public class UserServiceImpl implements UserService {
         userRepository.updateRecommend(email, recoOne, recoTwo, recoThr);
     }
 
-    /*@Transactional
-    public Like insertLike(int userId, int supplementId) {
-        Like like = Like.builder().userId(userId).supplementId(supplementId).build();
-        // 기존 영양제의 찜 값 가져오기
-        Supplement supplement = supplementRepository.findOneBySupplementId(supplementId);
-        int likeNum = supplement.getLike();
-        // 영양제에 찜 1 추가하기
-        supplementRepository.updateLike(supplementId, likeNum + 1);
-        return likeRepository.save(like);
-    }*/
+//    @Transactional
+//    public Like insertLike(int userId, int supplementId) {
+//        Like like = Like.builder().userId(userId).supplementId(supplementId).build();
+//        // 기존 영양제의 찜 값 가져오기
+//        Supplement supplement = supplementRepository.findOneBySupplementId(supplementId);
+//        int likeNum = supplement.getLike();
+//        // 영양제에 찜 1 추가하기
+//        supplementRepository.updateLike(supplementId, likeNum + 1);
+//        return likeRepository.save(like);
+//    }
+//
+//    @Transactional
+//    public void deleteLike(int userId, int supplementId) throws Exception {
+//        Supplement supplement = supplementRepository.findOneBySupplementId(supplementId);
+//        int likeNum = supplement.getLike();
+//        // 영양제의 찜 1 감소
+//        List<Like> list = likeRepository.likeClickOrNot(userId, supplementId);
+//        if (list.size() != 0) {
+//            likeRepository.delete(list.get(0));
+//            supplementRepository.updateLike(supplementId, likeNum - 1);
+//        }
+//    }
 
-    /*@Transactional
-    public void deleteLike(int userId, int supplementId) throws Exception {
-        Supplement supplement = supplementRepository.findOneBySupplementId(supplementId);
-        int likeNum = supplement.getLike();
-        // 영양제의 찜 1 감소
-        List<Like> list = likeRepository.likeClickOrNot(userId, supplementId);
-        if (list.size() != 0) {
-            likeRepository.delete(list.get(0));
-            supplementRepository.updateLike(supplementId, likeNum - 1);
-        }
-    }*/
-
-    /*@Transactional
-    public List<Like> getUserLike(int userId) throws Exception {
+    @Transactional
+    public List<Like> getUserLike(int userId) {
         List<Like> list = likeRepository.findAllByUserId(userId);
         return list;
-    }*/
+    }
 
-    /*@Transactional
-    public List<Integer> likeListOfSupplement(int supplementId) throws Exception {
+    @Transactional
+    public List<Integer> likeListOfSupplement(int supplementId) {
         List<Like> list = likeRepository.findAllBySupplementId(supplementId);
         List<Integer> UserIdList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             UserIdList.add(list.get(i).getUserId());
         }
         return UserIdList;
-    }*/
+    }
 
     @Transactional
     public void updateName(UpdateNameReq updateNameReq) {
