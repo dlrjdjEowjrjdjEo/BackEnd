@@ -1,7 +1,8 @@
-package com.medic.service;
+package com.medic.serviceImpl;
 
-import com.medic.jpa.CommonQuestion;
+import com.medic.entity.CommonQuestionEntity;
 import com.medic.jpa.CommonQuestionRepository;
+import com.medic.service.CommonQuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class CommonQuestionServiceImpl implements CommonQuestionService {
 	}
 
 	@Transactional
-	public CommonQuestion findOneByUserId(int userId) {
+	public CommonQuestionEntity findOneByUserId(int userId) {
 		return commonQuestionRepository.findOneByUserId(userId);
 	}
 
@@ -65,15 +66,15 @@ public class CommonQuestionServiceImpl implements CommonQuestionService {
 
 	@Transactional
 	public void createCq(int userId) {
-		CommonQuestion cq = CommonQuestion.builder()
+		CommonQuestionEntity cq = CommonQuestionEntity.builder()
 				.userId(userId)
 				.pregnant(false)
 				.smoking(false)
 				.allergy("")
-				.outdoor_activity(3)
-				.balanced_meal(false)
+				.outdoorActivity(3)
+				.balancedMeal(false)
 				.lack("")
-				.is_ok_big_pill(false)
+				.isOkBigPill(false)
 				.heartburn(false)
 				.constipation(	false)
 				.diarrhea(	false)
@@ -87,7 +88,7 @@ public class CommonQuestionServiceImpl implements CommonQuestionService {
 				.legCramp(false)
 				.anemia(false)
 				.thyroidDisease(false)
-				.kidney_disease(false)
+				.kidneyDisease(false)
 				.diabetes(false)
 				.gouty(false)
 				.highBloodPressure(false)
@@ -103,7 +104,7 @@ public class CommonQuestionServiceImpl implements CommonQuestionService {
 				.levothyroxine(false)
 				.antibiotics(false)
 				.physicalActivity(false)
-				.preferred_brand("")
+				.preferredBrand("")
 				.problem("")
 				.build();
 		commonQuestionRepository.save(cq);

@@ -1,10 +1,10 @@
 package com.medic.service;
 
-import com.medic.jpa.CommonQuestion;
+import com.medic.entity.CommonQuestionEntity;
 
 public interface CommonQuestionService {
 
-    CommonQuestion findOneByUserId(int userId);
+    CommonQuestionEntity findOneByUserId(int userId);
     void updateVitaminD(int userId);
     void updateMultivitamin(int userId);
     void updateFe(int userId);

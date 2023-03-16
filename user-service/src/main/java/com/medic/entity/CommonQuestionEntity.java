@@ -1,22 +1,27 @@
-package com.medic.jpa;
+package com.medic.entity;
+
+import lombok.Builder;
+import lombok.Getter;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
-import lombok.*;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "commonquestion")
 @Getter
-@Setter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class CommonQuestion {
+public class CommonQuestionEntity {
+
+	/**
+	 * 변경사항
+	 * 1. 변수명 카멜케이스로 renaming (db 컬럼명엔 변화X)
+	 * 2. 롬복 어노테이션 정리 및 빌더패턴 사용
+	 * */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int userId;
+	private Integer userId;
 
 	@Column(name = "pregnant")
 	private Boolean pregnant;
@@ -25,25 +30,25 @@ public class CommonQuestion {
 	private Boolean smoking;
 
 	@Column(name = "drinking")
-	private Integer drinking; //한달에 1~2회 / 일주일에 1~2회 / 일주일에 3회 이상 각 1, 3, 6점으로
-	
+	private Integer drinking; // -단일선택 (한달에 1~2회 / 일주일에 1~2회 / 일주일에 3회 이상) 각 1, 3, 6점으로
+
 	@Column(name = "allergy")
-	private String allergy; // 꽃가루/허브/꿀/벌/생선/계란
+	private String allergy; // -중복선택 ( 꽃가루 / 허브 / 꿀 / 벌 / 생선 / 계란)
 
 	@Column(name = "outdoor_activity")
-	private Integer outdoor_activity; // (충분한 양의 햇볕을 쬔다 / 종종 햇볕을 쬔다 / 거의 햇볕을 쬐지 않는다 ) 각 1, 3, 6점으로
+	private Integer outdoorActivity; // -단일선택 (충분한 양의 햇볕을 쬔다 / 종종 햇볕을 쬔다 / 거의 햇볕을 쬐지 않는다 ) 각 1, 3, 6점으로
 
 	@Column(name = "balanced_meal")
-	private Boolean balanced_meal; //아니오를 선택했다면 채소/생선/과일/육류 버튼으로 중복선택 가능하게끔
+	private Boolean balancedMeal; //아니오를 선택했다면 lack 컬럼에서 채소/생선/과일/육류 중 중복선택
 
 	@Column(name = "lack")
-	private String lack; // lackFish, lackVeg, lackFruit, lackMeat
+	private String lack; // -중복선택 ( lackFish / lackVeg / lackFruit / lackMeat)
 
 	@Column(name = "is_ok_big_pill")
-	private Boolean is_ok_big_pill;
+	private Boolean isOkBigPill;
 
 	/* 다음 중 해당하는 증상이 있다면 선택해주세요.
-	-중복선택 (속쓰림 / 변비 / 설사 / 소화장애 / 요통 / 편두통 / 과민성 대장 증후군 / 아토피 피부염 / 비듬 / 야간 다리 경련 / 구내염)*/
+    -중복선택 (속쓰림 / 변비 / 설사 / 소화장애 / 요통 / 편두통 / 과민성 대장 증후군 / 아토피 피부염 / 비듬 / 야간 다리 경련 / 구내염)*/
 	@Column(name = "heartburn")
 	private Boolean heartburn; //속쓰림
 
@@ -52,7 +57,7 @@ public class CommonQuestion {
 
 	@Column(name = "diarrhea")
 	private Boolean diarrhea; // 설사
-		
+
 	@Column(name = "digestive_disorder")
 	private Boolean digestiveDisorder; // 소화장애
 
@@ -77,8 +82,9 @@ public class CommonQuestion {
 	@Column(name = "leg_cramp")
 	private Boolean legCramp; // 다리 경련
 
-	/*다음 중 해당하는 질환을 앓고 계시다면 선택해주세요.
-	-중복선택 ( 빈혈 / 갑상선 질환 / 신장 질환 / 당뇨병 / 통풍 / 고혈압 / 고지혈증 / 치주염 / 심부전)*/
+    /*다음 중 해당하는 질환을 앓고 계시다면 선택해주세요.
+    -중복선택 ( 빈혈 / 갑상선 질환 / 신장 질환 / 당뇨병 / 통풍 / 고혈압 / 고지혈증 / 치주염 / 심부전)*/
+
 	@Column(name = "anemia")
 	private Boolean anemia; // 빈혈
 
@@ -86,7 +92,7 @@ public class CommonQuestion {
 	private Boolean thyroidDisease; // 갑상선 질환
 
 	@Column(name = "kidney_disease")
-	private Boolean kidney_disease; // 신장 질환
+	private Boolean kidneyDisease; // 신장 질환
 
 	@Column(name = "diabetes")
 	private Boolean diabetes; // 당뇨병
@@ -132,20 +138,17 @@ public class CommonQuestion {
 
 	@Column(name = "antibiotics")
 	private Boolean antibiotics; //항생제
-	
+
 	@Column(name = "physical_activity")
 	private Boolean physicalActivity; //격렬한 신체 활동
-	
+
 	@Column(name = "preferred_brand")
-	private String preferred_brand;
+	private String preferredBrand;
 
 	/*11. 영양제로 해결하고 싶은 증상을 선택해주세요.
 	-중복선택 ( 면역력 개선 / 암, 심혈관 질환 예방 / 치매 예방 / 식후 혈당 관리 / 콜레스테롤 수치 개선 / 관절 통증
-			/ 뼈 건강 / 간 건강 / 우울감 / PMS, 월경통 / 빈혈 /  수면 / 눈 건강 / 청력 보호 / 주름 개선 / 모발 건강  ) */
+			/ 뼈 건강 / 간 건강 / 우울감 / PMS, 월경통 / 빈혈 /  수면 / 눈 건강 / 청력 보호 / 주름 개선 / 모발 건강) */
 
 	@Column(name = "problem")
 	private String problem;
-
 }
-
-

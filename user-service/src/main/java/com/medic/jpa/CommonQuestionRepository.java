@@ -1,14 +1,15 @@
 package com.medic.jpa;
 
+import com.medic.entity.CommonQuestionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CommonQuestionRepository extends JpaRepository<CommonQuestion, Integer>{
+public interface CommonQuestionRepository extends JpaRepository<CommonQuestionEntity, Integer>{
     @Query(value = "select * from commonquestion where user_id = ?1", nativeQuery = true)
-    CommonQuestion findOneByUserId(Integer userId);
+    CommonQuestionEntity findOneByUserId(Integer userId);
     
     @Modifying
     @Query(value = "update commonquestion set diabetes = true where user_id = ?1", nativeQuery = true)

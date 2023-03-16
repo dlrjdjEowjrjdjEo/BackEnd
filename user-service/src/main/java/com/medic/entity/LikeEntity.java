@@ -1,4 +1,4 @@
-package com.medic.jpa;
+package com.medic.entity;
 
 
 import lombok.*;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Like {
+public class LikeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "like_id")

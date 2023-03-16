@@ -2,10 +2,10 @@ package com.medic.controller;
 
 import com.medic.codef.Codef;
 import com.medic.dto.*;
-import com.medic.jpa.CommonQuestion;
-import com.medic.jpa.Like;
-import com.medic.jpa.UserEntity;
-import com.medic.service.CommonQuestionServiceImpl;
+import com.medic.entity.CommonQuestionEntity;
+import com.medic.entity.LikeEntity;
+import com.medic.entity.UserEntity;
+import com.medic.serviceImpl.CommonQuestionServiceImpl;
 import com.medic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -150,7 +150,7 @@ public class UserController {
     //유저가 누른 좋아요 개수를 통해서 프론트가 필요한 데이터 전달
     @GetMapping("/userLike/{userId}")
     public ResponseEntity<?> getUserLike(@PathVariable int userId) {
-        List<Like> list = userService.getUserLike(userId);
+        List<LikeEntity> list = userService.getUserLike(userId);
         List<HashMap<String, Object>> supList = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
         /*for (int i = 0; i < list.size(); i++) {
@@ -173,13 +173,13 @@ public class UserController {
     }
 
     @PutMapping("/user/updateName")
-    public ResponseEntity<?> updateName(@RequestBody UpdateNameReq updateNameReq) {
+    public ResponseEntity<?> updateName(@RequestBody UserDTO.ReqUpdateName updateNameReq) {
         userService.updateName(updateNameReq);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
     @PutMapping("/user/firstSurvey")
-    public ResponseEntity<?> firstSurvey(@RequestBody UserFirstSurveyReq userFirstSurveyReq) {
+    public ResponseEntity<?> firstSurvey(@RequestBody UserDTO.ReqFirstSurvey userFirstSurveyReq) {
 //		System.out.println("컨트롤러에서의 outdoor =>"+userFirstSurveyReq.getOutdoor_activity());
         String[] arr = userService.userFirstSurvey(userFirstSurveyReq);
         UserEntity userEntity = userService.findOneByUserId(userFirstSurveyReq.getUserId());
@@ -202,12 +202,12 @@ public class UserController {
 
     @GetMapping("/findCommonQuestion/{userId}")
     public ResponseEntity<?> findCommonQuestion(@PathVariable Integer userId) {
-        CommonQuestion data = commonQuestionServiceImpl.findOneByUserId(userId);
+        CommonQuestionEntity data = commonQuestionServiceImpl.findOneByUserId(userId);
 
         String disease = "";
         if (data.getAnemia()) disease += "빈혈, ";
         if (data.getThyroidDisease()) disease += "갑상선 질환, ";
-        if (data.getKidney_disease()) disease += "신장 질환, ";
+        if (data.getKidneyDisease()) disease += "신장 질환, ";
         if (data.getDiabetes()) disease += "당뇨병, ";
         if (data.getHighBloodPressure()) disease += "고혈압, ";
         if (data.getHyperlipidemia()) disease += "고지혈증, ";
@@ -232,21 +232,21 @@ public class UserController {
 
         Boolean menopause = false;
         String brand = "";
-        if (data.getPreferred_brand().contains("뉴트리코어")) brand += "뉴트리코어, ";
-        if (data.getPreferred_brand().contains("종근당")) brand += "종근당, ";
-        if (data.getPreferred_brand().contains("GC녹십자")) brand += "GC녹십자, ";
-        if (data.getPreferred_brand().contains("제일헬스사이언스")) brand += "제일헬스사이언스, ";
-        if (data.getPreferred_brand().contains("하루틴")) brand += "하루틴, ";
-        if (data.getPreferred_brand().contains("solgar")) brand += "solgar, ";
-        if (data.getPreferred_brand().contains("natural factors")) brand += "natural factors, ";
-        if (data.getPreferred_brand().contains("Life Extension")) brand += "Life Extension, ";
-        if (data.getPreferred_brand().contains("21st Century")) brand += "21st Century, ";
-        if (data.getPreferred_brand().contains("Thorne Research")) brand += "Thorne Research, ";
-        if (data.getPreferred_brand().contains("NOW Foods")) brand += "NOW Foods, ";
-        if (data.getPreferred_brand().contains("MegaFood")) brand += "MegaFood, ";
-        if (data.getPreferred_brand().contains("Rainbow Light")) brand += "Rainbow Light, ";
-        if (data.getPreferred_brand().contains("Jarrow Formulas")) brand += "Jarrow Formulas, ";
-        if (data.getPreferred_brand().contains("Source Naturals")) brand += "Source Naturals, ";
+        if (data.getPreferredBrand().contains("뉴트리코어")) brand += "뉴트리코어, ";
+        if (data.getPreferredBrand().contains("종근당")) brand += "종근당, ";
+        if (data.getPreferredBrand().contains("GC녹십자")) brand += "GC녹십자, ";
+        if (data.getPreferredBrand().contains("제일헬스사이언스")) brand += "제일헬스사이언스, ";
+        if (data.getPreferredBrand().contains("하루틴")) brand += "하루틴, ";
+        if (data.getPreferredBrand().contains("solgar")) brand += "solgar, ";
+        if (data.getPreferredBrand().contains("natural factors")) brand += "natural factors, ";
+        if (data.getPreferredBrand().contains("Life Extension")) brand += "Life Extension, ";
+        if (data.getPreferredBrand().contains("21st Century")) brand += "21st Century, ";
+        if (data.getPreferredBrand().contains("Thorne Research")) brand += "Thorne Research, ";
+        if (data.getPreferredBrand().contains("NOW Foods")) brand += "NOW Foods, ";
+        if (data.getPreferredBrand().contains("MegaFood")) brand += "MegaFood, ";
+        if (data.getPreferredBrand().contains("Rainbow Light")) brand += "Rainbow Light, ";
+        if (data.getPreferredBrand().contains("Jarrow Formulas")) brand += "Jarrow Formulas, ";
+        if (data.getPreferredBrand().contains("Source Naturals")) brand += "Source Naturals, ";
 
         String problem = "";
         if (data.getProblem().contains("면역력 개선")) problem += "면역력 개선, ";
@@ -279,16 +279,18 @@ public class UserController {
         if (data.getStomatitis()) symptom += "구내염, ";
         if (data.getLegCramp()) symptom += "야간 다리 경련, ";
 
-        CommonQuestionRes cm = new CommonQuestionRes(
+        SurveyDTO.ResCommon cm = new SurveyDTO.ResCommon(
                 data.getAllergy(),
-                data.getBalanced_meal(),
-                disease, data.getDrinking(),
-                data.getIs_ok_big_pill(),
+                data.getBalancedMeal(),
+                disease,
+                data.getDrinking(),
+                data.getIsOkBigPill(),
                 lack,
                 medicine,
                 menopause,
-                data.getOutdoor_activity(),
-                brand, data.getPregnant(),
+                data.getOutdoorActivity(),
+                brand,
+                data.getPregnant(),
                 problem,
                 data.getSmoking(),
                 symptom,

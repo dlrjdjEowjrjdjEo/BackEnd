@@ -1,12 +1,10 @@
 package com.medic.service;
 
 import com.medic.dto.HealthDTO;
-import com.medic.dto.UpdateNameReq;
-import com.medic.dto.UserFirstSurveyReq;
-import com.medic.jpa.CommonQuestion;
-import com.medic.dto.CompareUser;
-import com.medic.jpa.Like;
-import com.medic.jpa.UserEntity;
+import com.medic.dto.UserDTO;
+import com.medic.entity.CommonQuestionEntity;
+import com.medic.entity.LikeEntity;
+import com.medic.entity.UserEntity;
 
 import java.util.List;
 
@@ -17,11 +15,11 @@ public interface UserService  {
     void updateRecommend(String email, String recoOne, String recoTwo, String recoThr);
 //    Like insertLike(int userId, int supplementId);
 //    void deleteLike(int userId, int supplementId);
-    List<Like> getUserLike(int userId);
+    List<LikeEntity> getUserLike(int userId);
     List<Integer> likeListOfSupplement(int supplementId);
-    void updateName(UpdateNameReq updateNameReq);
-    String[] userFirstSurvey(UserFirstSurveyReq userFirstSurveyReq);
+    void updateName(UserDTO.ReqUpdateName updateNameReq);
+    String[] userFirstSurvey(UserDTO.ReqFirstSurvey userFirstSurveyReq);
     void insertDetail(HealthDTO.ReqDetail detailHealthReq);
     void patchGender(String email, String gender);
-    List<CompareUser> calcSimilarity(CommonQuestion cq, int age, String gender, int uuId);
+    List<UserDTO.CompareUser> calcSimilarity(CommonQuestionEntity cq, int age, String gender, int uuId);
 }
