@@ -78,8 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public List<Like> getUserLike(int userId) {
-        List<Like> list = likeRepository.findAllByUserId(userId);
-        return list;
+        return likeRepository.findAllByUserId(userId);
     }
 
     @Transactional
@@ -393,13 +392,8 @@ public class UserServiceImpl implements UserService {
         map.put("콜라겐", collagen);
         map.put("철분", Fe);
         map.put("프로폴리스", profolis);
-        List<Map.Entry<String, Integer>> list = new ArrayList(map.entrySet());
-        list.sort(new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o2.getValue() - o1.getValue();
-            }
-        });
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+        list.sort((o1, o2) -> o2.getValue() - o1.getValue());
         String[] arr = new String[3];
         for(int i=0; i<3;i++) {
             arr[i]=(list.get(i)).getKey();
@@ -510,7 +504,7 @@ public class UserServiceImpl implements UserService {
         String preferred_brand = cq.getPreferred_brand();
         String problem = cq.getProblem();
 
-        List<CompareUser> comparedUser = new ArrayList<CompareUser>();
+        List<CompareUser> comparedUser = new ArrayList<>();
 
         // 리스트에 있는 유저별로 cq를 받아오고 각각 비교
         for (UserEntity u : userList) {
@@ -522,11 +516,11 @@ public class UserServiceImpl implements UserService {
                 cnt++;
             if (ucq.getSmoking() == smoking)
                 cnt++;
-            if (ucq.getDrinking() == drinking)
+            if (Objects.equals(ucq.getDrinking(), drinking))
                 cnt++;
             if (ucq.getAllergy().contains(allergy) || allergy.contains(ucq.getAllergy()))
                 cnt++;
-            if (ucq.getOutdoor_activity() == outdoor_activity)
+            if (Objects.equals(ucq.getOutdoor_activity(), outdoor_activity))
                 cnt++;
             if (ucq.getBalanced_meal() == balanced_meal)
                 cnt++;

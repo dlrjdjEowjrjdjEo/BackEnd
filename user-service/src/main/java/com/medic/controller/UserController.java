@@ -144,7 +144,7 @@ public class UserController {
     @GetMapping("/supplementlike/{supplementId}")
     public ResponseEntity<?> deleteLike(@PathVariable int supplementId) {
         List<Integer> list = userService.likeListOfSupplement(supplementId);
-        return new ResponseEntity<List<Integer>>(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     //유저가 누른 좋아요 개수를 통해서 프론트가 필요한 데이터 전달
@@ -163,14 +163,13 @@ public class UserController {
             babyMap.put("like", supplement.getLike());
             supList.add(babyMap);
         }*/
-
-        return new ResponseEntity<List<HashMap<String, Object>>>(supList, HttpStatus.OK);
+        return new ResponseEntity<>(supList, HttpStatus.OK);
     }
 
     @GetMapping("/user/{email}")
     public ResponseEntity<?> deleteLike(@PathVariable String email) {
         UserEntity user = userService.findOneByEmail(email);
-        return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/user/updateName")
@@ -197,8 +196,6 @@ public class UserController {
     //성별 바꿔주자
     @PatchMapping("/user/patchgender/{email}/{gender}")
     public ResponseEntity<?> patchGender(@PathVariable String email, @PathVariable String gender) {
-//		System.out.println(email);
-//		System.out.println(gender);
         userService.patchGender(email, gender);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -281,7 +278,6 @@ public class UserController {
         if (data.getDandruff()) symptom += "비듬, ";
         if (data.getStomatitis()) symptom += "구내염, ";
         if (data.getLegCramp()) symptom += "야간 다리 경련, ";
-
 
         CommonQuestionRes cm = new CommonQuestionRes(
                 data.getAllergy(),
