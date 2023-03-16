@@ -1,21 +1,27 @@
 package com.medic.service;
 
-import com.medic.jpa.UserEntity;
-import com.medic.jpa.UserRepository;
+import com.medic.dto.HealthDTO;
+import com.medic.dto.UpdateNameReq;
+import com.medic.dto.UserFirstSurveyReq;
+import com.medic.jpa.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
+    CommonQuestionRepository commonQuestionRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, CommonQuestionRepository commonQuestionRepository) {
         this.userRepository = userRepository;
+        this.commonQuestionRepository = commonQuestionRepository;
     }
 
     // 회원 등록
@@ -30,19 +36,23 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    /*@Transactional
-    public UserEntity findOneByUserId(int userId) throws Exception {
+    @Transactional
+    public UserEntity findOneByUserId(int userId) {
         return userRepository.findOneByUserId(userId);
     }
 
     @Transactional
-    public void updateRecommend(String email, String recoOne, String recoTwo, String recoThr) throws Exception {
-//        User user = userRepository.findOneByEmail(email);
-        userRepository.updateRecommend(email, recoOne, recoTwo, recoThr);
+    public UserEntity findOneByEmail(String email) {
+        return userRepository.findOneByEmail(email);
     }
 
     @Transactional
-    public Like insertLike(int userId, int supplementId) throws Exception {
+    public void updateRecommend(String email, String recoOne, String recoTwo, String recoThr) {
+        userRepository.updateRecommend(email, recoOne, recoTwo, recoThr);
+    }
+
+    /*@Transactional
+    public Like insertLike(int userId, int supplementId) {
         Like like = Like.builder().userId(userId).supplementId(supplementId).build();
         // 기존 영양제의 찜 값 가져오기
         Supplement supplement = supplementRepository.findOneBySupplementId(supplementId);
@@ -50,9 +60,9 @@ public class UserServiceImpl implements UserService {
         // 영양제에 찜 1 추가하기
         supplementRepository.updateLike(supplementId, likeNum + 1);
         return likeRepository.save(like);
-    }
+    }*/
 
-    @Transactional
+    /*@Transactional
     public void deleteLike(int userId, int supplementId) throws Exception {
         Supplement supplement = supplementRepository.findOneBySupplementId(supplementId);
         int likeNum = supplement.getLike();
@@ -62,15 +72,15 @@ public class UserServiceImpl implements UserService {
             likeRepository.delete(list.get(0));
             supplementRepository.updateLike(supplementId, likeNum - 1);
         }
-    }
+    }*/
 
-    @Transactional
+    /*@Transactional
     public List<Like> getUserLike(int userId) throws Exception {
         List<Like> list = likeRepository.findAllByUserId(userId);
         return list;
-    }
+    }*/
 
-    @Transactional
+    /*@Transactional
     public List<Integer> likeListOfSupplement(int supplementId) throws Exception {
         List<Like> list = likeRepository.findAllBySupplementId(supplementId);
         List<Integer> UserIdList = new ArrayList<>();
@@ -78,27 +88,15 @@ public class UserServiceImpl implements UserService {
             UserIdList.add(list.get(i).getUserId());
         }
         return UserIdList;
-    }
+    }*/
 
     @Transactional
-    public UserEntity findOneByEmail(String email) throws Exception {
-        UserEntity user = userRepository.findOneByEmail(email);
-        return user;
-    }
-
-    @Transactional
-    public UserEntity findOneByUserId(int userId) throws Exception {
-        UserEntity user = userRepository.findOneByUserId(userId);
-        return user;
-    }
-
-    @Transactional
-    public void updateName(UpdateNameReq updateNameReq) throws Exception {
+    public void updateName(UpdateNameReq updateNameReq) {
         userRepository.updateName(updateNameReq.getUserId(), updateNameReq.getName());
     }
 
     @Transactional
-    public String[] userFirstSurvey(UserFirstSurveyReq userFirstSurveyReq) throws Exception {
+    public String[] userFirstSurvey(UserFirstSurveyReq userFirstSurveyReq) {
         UserEntity user = findOneByUserId(userFirstSurveyReq.getUserId());
 
         int vitaminB = 0;
@@ -153,8 +151,6 @@ public class UserServiceImpl implements UserService {
             //여기는 뭐 별 상관 없을듯 그냥 값만 넘겨주면 됨
         }
 
-
-
         //앓는 증상
 //		if(userFirstSurveyReq.getSymptom().contains("속쓰림")) {
 //			multivitamin +=2;
@@ -192,8 +188,6 @@ public class UserServiceImpl implements UserService {
             Zn +=2;
             vitaminB+=2;
         }
-
-
 
         //앓고있는 질병
         if(userFirstSurveyReq.getDisease().contains("빈혈")) {
@@ -234,8 +228,6 @@ public class UserServiceImpl implements UserService {
             magnesium+=2;
             omega3+=2;
         }
-
-
 
         //복용중인 약
         if(userFirstSurveyReq.getMedicine().contains("피임약")) {
@@ -411,7 +403,6 @@ public class UserServiceImpl implements UserService {
             arr[i]=(list.get(i)).getKey();
         }
 
-
         CommonQuestion cq = CommonQuestion.builder()
                 .userId(userFirstSurveyReq.getUserId())
                 .pregnant(userFirstSurveyReq.isPregnant())
@@ -458,7 +449,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void insertDetail(HealthDTO.ReqDetail detailHealthReq) throws Exception {
+    public void insertDetail(HealthDTO.ReqDetail detailHealthReq) {
         CommonQuestion cq = CommonQuestion.builder().allergy(null).balanced_meal(false).constipation(false)
                 .diarrhea(false).heartburn(false).is_ok_big_pill(detailHealthReq.getPillSize()).kidney_disease(false)
                 .lack(null).preferred_brand(detailHealthReq.getBrand()).pregnant(false).problem(null)
@@ -467,7 +458,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void patchGender(String email, String gender) throws Exception {
+    public void patchGender(String email, String gender) {
         userRepository.patchGender(gender, email);
     }
 
@@ -612,5 +603,5 @@ public class UserServiceImpl implements UserService {
         Collections.sort(comparedUser);
 
         return comparedUser;
-    }*/
+    }
 }

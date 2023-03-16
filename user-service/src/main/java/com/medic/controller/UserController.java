@@ -1,6 +1,13 @@
 package com.medic.controller;
 
 import com.medic.codef.Codef;
+import com.medic.dto.CommonQuestionRes;
+import com.medic.dto.HealthDTO;
+import com.medic.dto.UpdateNameReq;
+import com.medic.dto.UserFirstSurveyReq;
+import com.medic.jpa.CommonQuestion;
+import com.medic.jpa.UserEntity;
+import com.medic.service.CommonQuestionService;
 import com.medic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +18,6 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,11 +30,13 @@ public class UserController {
 
     Codef codef;
     UserService userService;
+    CommonQuestionService commonQuestionService;
 
     @Autowired
-    public UserController(Codef codef, UserService userService) {
+    public UserController(Codef codef, UserService userService, CommonQuestionService commonQuestionService) {
         this.codef = codef;
         this.userService = userService;
+        this.commonQuestionService = commonQuestionService;
     }
 
     @GetMapping("/check")
@@ -80,7 +88,7 @@ public class UserController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    /*@PostMapping("/healthcheckdata")
+    @PostMapping("/healthcheckdata")
     public ResponseEntity<?> getHealthCheckData(@RequestBody HealthDTO.ReqGet getHealthReq) throws Exception {
         HashMap<String, Object> map = codef.getHealthCheckData(getHealthReq.getUserName(), getHealthReq.getPhoneNumber(), getHealthReq.getBirthday());
         List<String> list = (List<String>) map.get("list");
@@ -107,9 +115,8 @@ public class UserController {
 
     //큰 약 잘 먹는지, 선호하는 브랜드명,
     @PostMapping("/healthcheckdata/detailcheck")
-    public ResponseEntity<?> setCommonQuestionForHealthCheck(@RequestBody DetailHealthReq detailHealthReq) throws Exception {
+    public ResponseEntity<?> setCommonQuestionForHealthCheck(@RequestBody HealthDTO.ReqDetail detailHealthReq) throws Exception {
         userService.insertDetail(detailHealthReq);
-
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
@@ -121,73 +128,72 @@ public class UserController {
     }
 
     //5. 좋아요 누르면 insert
-    @PostMapping("/insertlike")
-    public ResponseEntity<?> insertLike(@RequestBody InsertLikeReq insertLikeReq) throws Exception {
-        userService.insertLike(insertLikeReq.getUserId(), insertLikeReq.getSupplementId());
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
+//    @PostMapping("/insertlike")
+//    public ResponseEntity<?> insertLike(@RequestBody InsertLikeReq insertLikeReq) throws Exception {
+//        userService.insertLike(insertLikeReq.getUserId(), insertLikeReq.getSupplementId());
+//        return new ResponseEntity<String>(HttpStatus.OK);
+//    }
 
     //6. 좋아요 눌러진거 삭제하기
-    @DeleteMapping("/deletelike/{userId}/{supplementId}")
-    public ResponseEntity<?> deleteLike(@PathVariable int userId, @PathVariable int supplementId) throws Exception {
-        userService.deleteLike(userId, supplementId);
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
+//    @DeleteMapping("/deletelike/{userId}/{supplementId}")
+//    public ResponseEntity<?> deleteLike(@PathVariable int userId, @PathVariable int supplementId) throws Exception {
+//        userService.deleteLike(userId, supplementId);
+//        return new ResponseEntity<String>(HttpStatus.OK);
+//    }
 
     //7. 영양제별 좋아요 개수 배열 리턴
-    @GetMapping("/supplementlike/{supplementId}")
-    public ResponseEntity<?> deleteLike(@PathVariable int supplementId) throws Exception {
-        List<Integer> list = userService.likeListOfSupplement(supplementId);
-        return new ResponseEntity<List<Integer>>(list, HttpStatus.OK);
-    }
+//    @GetMapping("/supplementlike/{supplementId}")
+//    public ResponseEntity<?> deleteLike(@PathVariable int supplementId) throws Exception {
+//        List<Integer> list = userService.likeListOfSupplement(supplementId);
+//        return new ResponseEntity<List<Integer>>(list, HttpStatus.OK);
+//    }
 
     //유저가 누른 좋아요 개수를 통해서 프론트가 필요한 데이터 전달
-    @GetMapping("/userLike/{userId}")
-    public ResponseEntity<?> getUserLike(@PathVariable int userId) throws Exception {
-        List<Like> list = userService.getUserLike(userId);
-        List<HashMap<String, Object>> supList = new ArrayList<>();
-        HashMap<String, Object> map = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            Supplement supplement = supplementService.getSupplement(list.get(i).getSupplementId());
-            HashMap<String, Object> babyMap = new HashMap<>();
-            babyMap.put("image", supplement.getImage());
-            babyMap.put("name", supplement.getSupplementName());
-            babyMap.put("brand", supplement.getBrand());
-            babyMap.put("supplementId", supplement.getSupplementId());
-            babyMap.put("like", supplement.getLike());
-            supList.add(babyMap);
-        }
-
-        return new ResponseEntity<List<HashMap<String, Object>>>(supList, HttpStatus.OK);
-    }
+//    @GetMapping("/userLike/{userId}")
+//    public ResponseEntity<?> getUserLike(@PathVariable int userId) throws Exception {
+//        List<Like> list = userService.getUserLike(userId);
+//        List<HashMap<String, Object>> supList = new ArrayList<>();
+//        HashMap<String, Object> map = new HashMap<>();
+//        for (int i = 0; i < list.size(); i++) {
+//            Supplement supplement = supplementService.getSupplement(list.get(i).getSupplementId());
+//            HashMap<String, Object> babyMap = new HashMap<>();
+//            babyMap.put("image", supplement.getImage());
+//            babyMap.put("name", supplement.getSupplementName());
+//            babyMap.put("brand", supplement.getBrand());
+//            babyMap.put("supplementId", supplement.getSupplementId());
+//            babyMap.put("like", supplement.getLike());
+//            supList.add(babyMap);
+//        }
+//
+//        return new ResponseEntity<List<HashMap<String, Object>>>(supList, HttpStatus.OK);
+//    }
 
     @GetMapping("/user/{email}")
-    public ResponseEntity<?> deleteLike(@PathVariable String email) throws Exception {
-        User user = userService.findOneByEmail(email);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+    public ResponseEntity<?> deleteLike(@PathVariable String email) {
+        UserEntity user = userService.findOneByEmail(email);
+        return new ResponseEntity<UserEntity>(user, HttpStatus.OK);
     }
 
     @PutMapping("/user/updateName")
-    public ResponseEntity<?> updateName(@RequestBody UpdateNameReq updateNameReq) throws Exception {
+    public ResponseEntity<?> updateName(@RequestBody UpdateNameReq updateNameReq) {
         userService.updateName(updateNameReq);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
     @PutMapping("/user/firstSurvey")
-    public ResponseEntity<?> firstSurvey(@RequestBody UserFirstSurveyReq userFirstSurveyReq) throws Exception {
+    public ResponseEntity<?> firstSurvey(@RequestBody UserFirstSurveyReq userFirstSurveyReq) {
 //		System.out.println("컨트롤러에서의 outdoor =>"+userFirstSurveyReq.getOutdoor_activity());
         String[] arr = userService.userFirstSurvey(userFirstSurveyReq);
-        User user = userService.findOneByUserId(userFirstSurveyReq.getUserId());
-        userService.updateRecommend(user.getEmail(), arr[0], arr[1], arr[2]);
-
+        UserEntity userEntity = userService.findOneByUserId(userFirstSurveyReq.getUserId());
+        userService.updateRecommend(userEntity.getEmail(), arr[0], arr[1], arr[2]);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
-    @PostMapping("/user/secondSurvey")
-    public ResponseEntity<?> secondSurvey(@RequestBody UserSecondSurveyReq userSecondSurveyReq) throws Exception {
-        List<SupplementAndScoreRes> list = recommendService.recommendSupplement(userSecondSurveyReq);
-        return new ResponseEntity<List<SupplementAndScoreRes>>(list, HttpStatus.OK);
-    }
+//    @PostMapping("/user/secondSurvey")
+//    public ResponseEntity<?> secondSurvey(@RequestBody UserSecondSurveyReq userSecondSurveyReq) throws Exception {
+//        List<SupplementAndScoreRes> list = recommendService.recommendSupplement(userSecondSurveyReq);
+//        return new ResponseEntity<List<SupplementAndScoreRes>>(list, HttpStatus.OK);
+//    }
 
     //성별 바꿔주자
     @PatchMapping("/user/patchgender/{email}/{gender}")
@@ -293,6 +299,6 @@ public class UserController {
                 symptom,
                 data.getPhysicalActivity(),
                 data.getUserId());
-        return new ResponseEntity<CommonQuestionRes>(cm, HttpStatus.OK);
-    }*/
+        return new ResponseEntity<>(cm, HttpStatus.OK);
+    }
 }

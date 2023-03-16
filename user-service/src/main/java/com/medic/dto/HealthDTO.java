@@ -1,4 +1,3 @@
-/*
 package com.medic.dto;
 
 import lombok.*;
@@ -8,7 +7,6 @@ import javax.validation.constraints.NotNull;
 public class HealthDTO {
 
     @Data
-    @Builder
     public static class ReqGet {
         @NotNull(message = "이름을 입력하세요.")
         private String userName;
@@ -24,8 +22,7 @@ public class HealthDTO {
     }
 
     @Data
-    @Builder
-    public class ReqDetail {
+    public static class ReqDetail {
         @NotNull(message = "알약 크기를 입력하세요.")
         private Boolean pillSize;
 
@@ -36,4 +33,3 @@ public class HealthDTO {
         private Integer userId;
     }
 }
-*/
