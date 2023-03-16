@@ -1,6 +1,6 @@
 package com.medic.dto;
 
-import com.medic.jpa.Routine;
+import com.medic.entity.RoutineEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalendarRes extends Routine {
+public class CalendarRes extends RoutineEntity {
 	private Boolean taken;
 	private int calendarId;
 

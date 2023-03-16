@@ -2,8 +2,8 @@ package com.medic.controller;
 
 import com.medic.dto.CalendarReq;
 import com.medic.dto.CalendarRes;
-import com.medic.jpa.Calendar;
-import com.medic.jpa.Routine;
+import com.medic.entity.CalendarEntity;
+import com.medic.entity.RoutineEntity;
 import com.medic.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,16 +34,16 @@ public class CalendarController {
 
 	@GetMapping("/{userId}/{month}")
 	public ResponseEntity<?> calendar(@PathVariable int userId, @PathVariable int month) {
-		List<Calendar> calendarList = mypageService.getCalendarMonthList(userId, month);
-		return new ResponseEntity<>(calendarList, HttpStatus.OK);
+		List<CalendarEntity> calendarEntityList = mypageService.getCalendarMonthList(userId, month);
+		return new ResponseEntity<>(calendarEntityList, HttpStatus.OK);
 	}
 
 	@GetMapping("/{userId}/{date}/{day}")
 	public ResponseEntity<?> myDate(@PathVariable int userId, @PathVariable String date, @PathVariable String day) {
 		List<CalendarRes> resultList = new ArrayList<>();
-		List<Routine> routineList = mypageService.getRoutineListByDay(userId, day, date);
-		List<Calendar> calendarList = mypageService.getCalendarDayList(userId, date);
-		for (Routine r : routineList) {
+		List<RoutineEntity> routineEntityList = mypageService.getRoutineListByDay(userId, day, date);
+		List<CalendarEntity> calendarEntityList = mypageService.getCalendarDayList(userId, date);
+		for (RoutineEntity r : routineEntityList) {
 			CalendarRes res = new CalendarRes();
 			res.setRoutineId(r.getRoutineId());
 			res.setUserId(r.getUserId());
@@ -57,7 +57,7 @@ public class CalendarController {
 			
 			int routineId = r.getRoutineId();
 			boolean taken = false;
-			for (Calendar c : calendarList) {
+			for (CalendarEntity c : calendarEntityList) {
 				if (c.getRoutineId() == routineId)
 					taken = true;
 				res.setCalendarId(c.getCalendarId());
@@ -70,16 +70,16 @@ public class CalendarController {
 
 	@GetMapping("/{calendarId}")
 	public ResponseEntity<?> getCalendar(@PathVariable int calendarId) {
-		Optional<Calendar> calendar = mypageService.getCalendar(calendarId);
+		Optional<CalendarEntity> calendar = mypageService.getCalendar(calendarId);
 		return new ResponseEntity<>(calendar, HttpStatus.OK);
 	}
 	
 	@PostMapping("/{userId}/{date}")
 	public ResponseEntity<?> insertCalendar(@RequestBody CalendarReq calendarReq) {
-		Calendar calendar = Calendar.builder().routineId(calendarReq.getRoutineId()).userId(calendarReq.getUserId())
+		CalendarEntity calendarEntity = CalendarEntity.builder().routineId(calendarReq.getRoutineId()).userId(calendarReq.getUserId())
 				.date(calendarReq.getDate()).taken(true).build();
-		mypageService.insertCalendar(calendar);
-		return new ResponseEntity<>(calendar.getCalendarId(), HttpStatus.OK);
+		mypageService.insertCalendar(calendarEntity);
+		return new ResponseEntity<>(calendarEntity.getCalendarId(), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{calendarId}")

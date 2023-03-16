@@ -1,7 +1,7 @@
 package com.medic.service;
 
-import com.medic.jpa.Calendar;
-import com.medic.jpa.Routine;
+import com.medic.entity.CalendarEntity;
+import com.medic.entity.RoutineEntity;
 import com.medic.jpa.RoutineRepository;
 import com.medic.jpa.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,33 +34,33 @@ public class MypageService {
 //	}
 
 	@Transactional
-	public List<Routine> getRoutineList(int userId) {
+	public List<RoutineEntity> getRoutineList(int userId) {
 		return routineRepository.findAllByUserId(userId);
 	}
 
 	@Transactional
-	public List<Routine> getRoutineListByDay(int userId, String day, String date) {
+	public List<RoutineEntity> getRoutineListByDay(int userId, String day, String date) {
 		return routineRepository.findAllByUserIdAndDay(userId, day, date);
 	}
 
 	@Transactional
-	public List<Calendar> getCalendarMonthList(int userId, int month) {
+	public List<CalendarEntity> getCalendarMonthList(int userId, int month) {
 		return calendarRepository.findAllByMonth(userId, month);
 	}
 
 	@Transactional
-	public List<Calendar> getCalendarDayList(int userId, String date) {
+	public List<CalendarEntity> getCalendarDayList(int userId, String date) {
 		return calendarRepository.findAllByDate(userId, date);
 	}
 
 	@Transactional
-	public Optional<Calendar> getCalendar(int calendarId) {
+	public Optional<CalendarEntity> getCalendar(int calendarId) {
 		return calendarRepository.findById(calendarId);
 	}
 
 	@Transactional
-	public Calendar insertCalendar(Calendar calendar) {
-		return calendarRepository.save(calendar);
+	public CalendarEntity insertCalendar(CalendarEntity calendarEntity) {
+		return calendarRepository.save(calendarEntity);
 	}
 
 	@Transactional
@@ -69,26 +69,26 @@ public class MypageService {
 	}
 
 	@Transactional
-	public Routine insertRoutine(Routine routine) {
-		return routineRepository.save(routine);
+	public RoutineEntity insertRoutine(RoutineEntity routineEntity) {
+		return routineRepository.save(routineEntity);
 	}
 
 	@Transactional
 	public void updateRoutineVisibility(int routineId, String deletedSince) {
-		Routine originalRoutine = routineRepository.findOneByRoutineId(routineId);
-		originalRoutine.setDeletedSince(deletedSince);
-		routineRepository.save(originalRoutine);
+		RoutineEntity originalRoutineEntity = routineRepository.findOneByRoutineId(routineId);
+		originalRoutineEntity.setDeletedSince(deletedSince);
+		routineRepository.save(originalRoutineEntity);
 	}
 
 	@Transactional
-	public void updateRoutine(int routineId, Routine routine, String deletedSince) {
-		Routine originalRoutine = routineRepository.findOneByRoutineId(routineId);
-		originalRoutine.setDeletedSince(deletedSince);
+	public void updateRoutine(int routineId, RoutineEntity routineEntity, String deletedSince) {
+		RoutineEntity originalRoutineEntity = routineRepository.findOneByRoutineId(routineId);
+		originalRoutineEntity.setDeletedSince(deletedSince);
 //		originalRoutine.setTime(routine.getTime());
 //		originalRoutine.setDay(routine.getDay());
 //		originalRoutine.setTablets(routine.getTablets());
 //		originalRoutine.setPushAlarm(routine.getPushAlarm());
-		routineRepository.save(originalRoutine);
-		routineRepository.save(routine);
+		routineRepository.save(originalRoutineEntity);
+		routineRepository.save(routineEntity);
 	}
 }

@@ -2,7 +2,7 @@ package com.medic.controller;
 
 import com.medic.dto.DeleteRoutineReq;
 import com.medic.dto.RoutineReq;
-import com.medic.jpa.Routine;
+import com.medic.entity.RoutineEntity;
 import com.medic.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,16 +39,16 @@ public class MypageController {
 
     @GetMapping("/{userId}/mysupplement")
     public ResponseEntity<?> mySupplement(@PathVariable int userId) {
-        List<Routine> list = mypageService.getRoutineList(userId);
+        List<RoutineEntity> list = mypageService.getRoutineList(userId);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/mysupplement")
     public ResponseEntity<?> insertSupplement(@PathVariable int userId, @RequestBody RoutineReq routineReq) {
-        Routine routine = Routine.builder().userId(userId).supplementId(routineReq.getSupplementId())
+        RoutineEntity routineEntity = RoutineEntity.builder().userId(userId).supplementId(routineReq.getSupplementId())
                 .time(routineReq.getTime()).day(routineReq.getDay()).tablets(routineReq.getTablets())
                 .pushAlarm(routineReq.getPushAlarm()).addedSince(routineReq.getAddedSince()).build();
-        mypageService.insertRoutine(routine);
+        mypageService.insertRoutine(routineEntity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -63,10 +63,10 @@ public class MypageController {
     public ResponseEntity<?> updateSupplement(@PathVariable int userId, @PathVariable int routineId,
                                               @RequestBody RoutineReq routineReq) {
         String deletedSince = routineReq.getAddedSince();
-        Routine routine = Routine.builder().userId(userId).supplementId(routineReq.getSupplementId())
+        RoutineEntity routineEntity = RoutineEntity.builder().userId(userId).supplementId(routineReq.getSupplementId())
                 .time(routineReq.getTime()).day(routineReq.getDay()).tablets(routineReq.getTablets())
                 .pushAlarm(routineReq.getPushAlarm()).addedSince(routineReq.getAddedSince()).build();
-        mypageService.updateRoutine(routineId, routine, deletedSince);
+        mypageService.updateRoutine(routineId, routineEntity, deletedSince);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
