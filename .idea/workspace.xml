@@ -4,35 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80020ab6-b797-40a3-8e35-e18206577361" name="Changes" comment="Refactor:">
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/LikeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/SurveyDTO.java" afterDir="false" />
+    <list default="true" id="80020ab6-b797-40a3-8e35-e18206577361" name="Changes" comment="Refactor: Change Dto Inner Class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/CalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/dto/CalendarRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/dto/CalendarRes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/entity/CalendarEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/CalendarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/CalendarRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/Routine.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/entity/RoutineEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/RoutineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/jpa/RoutineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/service/MypageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mypage-service/src/main/java/com/medic/service/MypageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/CommonQuestionRes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/CompareUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/InsertLikeReq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/UpdateNameReq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/dto/UserFirstSurveyReq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/entity/CommonQuestionEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/CommonQuestionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/entity/LikeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/LikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/LikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/jpa/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/CommonQuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/serviceImpl/CommonQuestionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/medic/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/medic/serviceImpl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,6 +263,8 @@
       <workItem from="1678927512773" duration="1796000" />
       <workItem from="1678929316521" duration="11522000" />
       <workItem from="1678951292693" duration="137000" />
+      <workItem from="1678955105026" duration="118000" />
+      <workItem from="1679013597150" duration="211000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: Add mypage controller check template">
       <created>1678681632380</created>
@@ -354,7 +329,21 @@
       <option name="project" value="LOCAL" />
       <updated>1678938684326</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor: Change Dto Inner Class">
+      <created>1678955189424</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1678955189424</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Refactor: Change Dto Inner Class">
+      <created>1678955208469</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1678955208469</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +361,8 @@
     <MESSAGE value="Refactor: Remove controller &amp; service dead code" />
     <MESSAGE value="Refactor: Remove calendar controller dead code" />
     <MESSAGE value="Refactor: Make CommonQuestionService" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor: Make CommonQuestionService" />
+    <MESSAGE value="Refactor: Change Dto Inner Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor: Change Dto Inner Class" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
